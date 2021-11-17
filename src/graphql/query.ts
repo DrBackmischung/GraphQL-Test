@@ -4,7 +4,7 @@ import {
     GraphQLList
 } from "graphql";
 import {
-    MovieType, ShowType
+    MovieType, RoomType, ShowType
 } from "./types";
 
 import axios from "axios";
@@ -42,6 +42,20 @@ export const RootQuery= new GraphQLObjectType({
             type:new GraphQLList(ShowType),
             resolve(parentValue: any, args: any) {
                 return axios.get('http://localhost:3000/shows/')
+                    .then(res => res.data);
+            }
+        },
+        room:{
+            type:new GraphQLList(RoomType),
+            resolve(parentValue: any, args: any) {
+                return axios.get('http://localhost:3000/rooms/'+args.id)
+                    .then(res => res.data);
+            }
+        },
+        rooms:{
+            type:new GraphQLList(RoomType),
+            resolve(parentValue: any, args: any) {
+                return axios.get('http://localhost:3000/rooms/')
                     .then(res => res.data);
             }
         },
