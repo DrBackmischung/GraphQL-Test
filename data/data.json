@@ -1,0 +1,93 @@
+{
+  "movies": [
+    {
+      "id": "0001",
+      "name": "Mathis stinkt",
+      "length": 2.4,
+      "age": 12,
+      "language": "German"
+    },
+    {
+      "id": "0002",
+      "name": "Mathis stinkt (Mathis stinks)",
+      "length": 2.4,
+      "age": 12,
+      "language": "English"
+    },
+    {
+      "id": "0003",
+      "name": "Mathis stinkt immer noch",
+      "length": 1.8,
+      "age": 12,
+      "language": "German"
+    },
+    {
+      "id": "0004",
+      "name": "Mathis stinkt nicht mehr",
+      "length": 2.1,
+      "age": 12,
+      "language": "German"
+    },
+    {
+      "id": "0005",
+      "name": "Mathis stinkt nicht mehr",
+      "length": 2.1,
+      "age": 12,
+      "language": "German"
+    },
+    {
+      "id": "0006",
+      "name": "Mathis stinkt schon wieder",
+      "length": 2.1,
+      "age": 12,
+      "language": "German"
+    },
+    {
+      "id": "0007",
+      "name": "Mathis stinkt oida!",
+      "length": 2.1,
+      "age": 12,
+      "language": "Schweizerdeutsch"
+    }
+  ],
+  "shows": [
+    {
+      "id": "0001",
+      "movie_id": "0003",
+      "year": 2021,
+      "month": 11,
+      "day": 17,
+      "hour": 18,
+      "minute": 30,
+      "age": 12
+    },
+    {
+      "id": "0002",
+      "movie_id": "0003",
+      "movie": {},
+      "year": 2021,
+      "month": 11,
+      "day": 17,
+      "hour": 18,
+      "minute": 30,
+      "age": 12
+    },
+    {
+      "id": "0003",
+      "movie_id": "0003",
+      "movie": {
+        "id": "0003",
+        "name": "Mathis stinkt immer noch",
+        "length": 1.8,
+        "age": 12,
+        "language": "German"
+      },
+      "year": 2021,
+      "month": 11,
+      "day": 17,
+      "hour": 18,
+      "minute": 30,
+      "age": 12
+    }
+  ]
+}
