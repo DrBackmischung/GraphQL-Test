@@ -59,35 +59,13 @@
       "day": 17,
       "hour": 18,
       "minute": 30,
-      "age": 12
-    },
-    {
-      "id": "0002",
-      "movie_id": "0003",
-      "movie": {},
-      "year": 2021,
-      "month": 11,
-      "day": 17,
-      "hour": 18,
-      "minute": 30,
-      "age": 12
-    },
-    {
-      "id": "0003",
-      "movie_id": "0003",
-      "movie": {
-        "id": "0003",
-        "name": "Mathis stinkt immer noch",
-        "length": 1.8,
-        "age": 12,
-        "language": "German"
-      },
-      "year": 2021,
-      "month": 11,
-      "day": 17,
-      "hour": 18,
-      "minute": 30,
-      "age": 12
+      "age": 12,
+      "room_id": "0001"
     }
-  ]
+  ],
+  "rooms": [],
+  "customers": [],
+  "bookings": [],
+  "seatPlans": [],
+  "seats": []
 }

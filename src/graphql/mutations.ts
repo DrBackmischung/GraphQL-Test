@@ -4,9 +4,19 @@ import {
     GraphQLString,
     GraphQLFloat,
     GraphQLInt,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLBoolean,
+    GraphQLList
 } from "graphql";
-import { MovieType, MovieInputType, ShowType, RoomType } from "./types";
+import {
+    MovieType,
+    ShowType,
+    RoomType,
+    SeatType,
+    SeatingPlanType,
+    BookingType,
+    CustomerType
+} from "./types";
 
 export const RootMutation = new GraphQLObjectType({
     name: 'RootMutation',
@@ -60,29 +70,95 @@ export const RootMutation = new GraphQLObjectType({
             args:{
                 id: {type:new GraphQLNonNull(GraphQLString)},
                 movie_id: {type:new GraphQLNonNull(GraphQLString)},
-                movie: {type:MovieInputType},
                 year: {type:new GraphQLNonNull(GraphQLInt)},
                 month: {type:new GraphQLNonNull(GraphQLInt)},
                 day: {type:new GraphQLNonNull(GraphQLInt)},
                 hour: {type:new GraphQLNonNull(GraphQLInt)},
                 minute: {type:new GraphQLNonNull(GraphQLInt)},
                 age: {type:new GraphQLNonNull(GraphQLInt)},
-                //room: {type:RoomInputType}
+                room_id: {type:new GraphQLNonNull(GraphQLString)},
             },
-            async resolve(parentValue: any, args: any) {
-                const movie = await axios.get('http://localhost:3000/movies/'+args.movie_id).then(res => res.data);
-                console.log(movie);
+            resolve(parentValue: any, args: any) {
                 return axios.post('http://localhost:3000/shows', {
                     id:args.id,
                     movie_id:args.movie_id,
-                    movie,
                     year:args.year,
                     month:args.month,
                     day:args.day,
                     hour:args.hour,
                     minute:args.minute,
-                    age:args.age
+                    age:args.age,
+                    room_id:args.room_id
                 })
+                .then(res => res.data);
+            }
+        },
+        deleteShow:{
+            type:ShowType,
+            args:{
+                id: {type:new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue: any, args: any) {
+                return axios.delete('http://localhost:3000/shows/'+args.id)
+                .then(res => res.data);
+            }
+        },
+        updateShow:{
+            type:ShowType,
+            args:{
+                id: {type:new GraphQLNonNull(GraphQLString)},
+                movie_id: {type:(GraphQLString)},
+                year: {type:(GraphQLInt)},
+                month: {type:(GraphQLInt)},
+                day: {type:(GraphQLInt)},
+                hour: {type:(GraphQLInt)},
+                minute: {type:(GraphQLInt)},
+                age: {type:(GraphQLInt)},
+                room_id: {type:(GraphQLString)}
+            },
+            resolve(parentValue: any, args: any) {
+                return axios.patch('http://localhost:3000/movies/'+args.id, args)
+                .then(res => res.data);
+            }
+        },
+        addRoom:{
+            type:RoomType,
+            args:{
+                id: {type:new GraphQLNonNull(GraphQLString)},
+                seatingPlan_id: {type:new GraphQLNonNull(GraphQLString)},
+                can3D: {type:new GraphQLNonNull(GraphQLBoolean)},
+                can4D: {type:new GraphQLNonNull(GraphQLBoolean)}
+            },
+            resolve(parentValue: any, args: any) {
+                return axios.post('http://localhost:3000/rooms', {
+                    id:args.id,
+                    seatingPlan_id:args.seatingPlan_id,
+                    can3D:args.can3D,
+                    can4D:args.can4D
+                })
+                .then(res => res.data);
+            }
+        },
+        deleteRoom:{
+            type:RoomType,
+            args:{
+                id: {type:new GraphQLNonNull(GraphQLString)}
+            },
+            resolve(parentValue: any, args: any) {
+                return axios.delete('http://localhost:3000/rooms/'+args.id)
+                .then(res => res.data);
+            }
+        },
+        updateRoom:{
+            type:RoomType,
+            args:{
+                id: {type:new GraphQLNonNull(GraphQLString)},
+                seatingPlan_id: {type:(GraphQLString)},
+                can3D: {type:(GraphQLBoolean)},
+                can4D: {type:(GraphQLBoolean)}
+            },
+            resolve(parentValue: any, args: any) {
+                return axios.patch('http://localhost:3000/rooms/'+args.id, args)
                 .then(res => res.data);
             }
         }
