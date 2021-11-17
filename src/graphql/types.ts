@@ -45,6 +45,24 @@ export const ShowType = new GraphQLObjectType({
         hour: {type:GraphQLInt},
         minute: {type:GraphQLInt},
         age: {type:GraphQLInt},
+        room_id: {type:GraphQLString},
+        room: {type:RoomType}
+    })
+})
+
+export const ShowInputType = new GraphQLObjectType({
+    name: 'ShowInput',
+    fields: () => ({
+        id: {type:GraphQLString},
+        movie_id: {type:GraphQLString},
+        movie: {type:MovieType},
+        year: {type:GraphQLInt},
+        month: {type:GraphQLInt},
+        day: {type:GraphQLInt},
+        hour: {type:GraphQLInt},
+        minute: {type:GraphQLInt},
+        age: {type:GraphQLInt},
+        room_id: {type:GraphQLString},
         room: {type:RoomType}
     })
 })
@@ -52,6 +70,19 @@ export const ShowType = new GraphQLObjectType({
 export const RoomType = new GraphQLObjectType({
     name: 'Room',
     fields: () => ({
+        id: {type:GraphQLString},
+        seatingPlan_id: {type:GraphQLString},
+        seatingPlan: {type:SeatingPlanType},
+        can3D: {type:GraphQLBoolean},
+        can4D: {type:GraphQLBoolean}
+    })
+})
+
+export const RoomInputType = new GraphQLObjectType({
+    name: 'RoomInput',
+    fields: () => ({
+        id: {type:GraphQLString},
+        seatingPlan_id: {type:GraphQLString},
         seatingPlan: {type:SeatingPlanType},
         can3D: {type:GraphQLBoolean},
         can4D: {type:GraphQLBoolean}
@@ -61,6 +92,17 @@ export const RoomType = new GraphQLObjectType({
 export const SeatingPlanType = new GraphQLObjectType({
     name: 'SeatingPlan',
     fields: () => ({
+        id: {type:GraphQLString},
+        seat_ids: {type:new GraphQLList(GraphQLString)},
+        seats: {type:new GraphQLList(SeatType)}
+    })
+})
+
+export const SeatingPlanInputType = new GraphQLObjectType({
+    name: 'SeatingPlanInput',
+    fields: () => ({
+        id: {type:GraphQLString},
+        seat_ids: {type:new GraphQLList(GraphQLString)},
         seats: {type:new GraphQLList(SeatType)}
     })
 })
@@ -68,6 +110,18 @@ export const SeatingPlanType = new GraphQLObjectType({
 export const SeatType = new GraphQLObjectType({
     name: 'Seat',
     fields: () => ({
+        id: {type:GraphQLString},
+        row: {type:GraphQLInt},
+        nr: {type:GraphQLInt},
+        classification: {type:SeatClassType},
+        booked: {type:GraphQLBoolean}
+    })
+})
+
+export const SeatInputType = new GraphQLObjectType({
+    name: 'SeatInput',
+    fields: () => ({
+        id: {type:GraphQLString},
         row: {type:GraphQLInt},
         nr: {type:GraphQLInt},
         classification: {type:SeatClassType},
@@ -78,7 +132,22 @@ export const SeatType = new GraphQLObjectType({
 export const BookingType = new GraphQLObjectType({
     name: 'Booking',
     fields: () => ({
+        id: {type:GraphQLString},
+        show_id: {type:GraphQLString},
         show: {type:ShowType},
+        seat_ids: {type:new GraphQLList(GraphQLString)},
+        seats: {type:new GraphQLList(SeatType)},
+        payed: {type:GraphQLBoolean}
+    })
+})
+
+export const BookingInputType = new GraphQLObjectType({
+    name: 'BookingInput',
+    fields: () => ({
+        id: {type:GraphQLString},
+        show_id: {type:GraphQLString},
+        show: {type:ShowType},
+        seat_ids: {type:new GraphQLList(GraphQLString)},
         seats: {type:new GraphQLList(SeatType)},
         payed: {type:GraphQLBoolean}
     })
@@ -87,9 +156,24 @@ export const BookingType = new GraphQLObjectType({
 export const CustomerType = new GraphQLObjectType({
     name: 'Customer',
     fields: () => ({
+        id: {type:GraphQLString},
         firstName: {type:GraphQLString},
         lastName: {type:GraphQLString},
         mail: {type:GraphQLString},
+        booking_ids: {type:new GraphQLList(GraphQLString)},
+        bookings: {type:new GraphQLList(BookingType)},
+        role: {type:CustomerRoleType}
+    })
+})
+
+export const CustomerInputType = new GraphQLObjectType({
+    name: 'CustomerInput',
+    fields: () => ({
+        id: {type:GraphQLString},
+        firstName: {type:GraphQLString},
+        lastName: {type:GraphQLString},
+        mail: {type:GraphQLString},
+        booking_ids: {type:new GraphQLList(GraphQLString)},
         bookings: {type:new GraphQLList(BookingType)},
         role: {type:CustomerRoleType}
     })
